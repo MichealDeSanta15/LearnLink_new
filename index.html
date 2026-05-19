@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnLink | Academic Networking</title>
+    <!-- Modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons for crisp icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header id="header">
+        <div class="logo">
+            <i class='bx bxs-graduation'></i>
+            <h2>LearnLink</h2>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="showHome()">Home</a></li>
+                <li><a href="#mentors" onclick="showHome()">Mentors</a></li>
+                <li><a href="#projects" onclick="showHome()">Projects</a></li>
+                <li id="nav-dashboard" style="display: none;"><a href="#dashboard" onclick="showDashboard()">Dashboard</a></li>
+                <li><button class="icon-btn" onclick="toggleTheme()"><i class='bx bx-moon' id="theme-icon"></i></button>
+                </li>
+                <li id="nav-login"><button class="btn-primary" onclick="showLogin()"><i class='bx bx-log-in'></i> Login</button></li>
+                <li id="nav-user" style="display: none;"><span style="color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px;"><i class='bx bx-user-circle' style="font-size: 24px;"></i> Student</span></li>
+                <li id="nav-logout" style="display: none;"><button class="btn-secondary" onclick="handleLogout()"><i class='bx bx-log-out'></i> Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <span class="badge">Chitkara University</span>
+                <h1>Connect, Learn, and Build Together.</h1>
+                <p>LearnLink is the ultimate platform to find experienced mentors, collaborate on active projects, and
+                    master new skills.</p>
+                <div class="hero-buttons">
+                    <a href="#mentors" class="btn-primary"><i class='bx bx-search-alt'></i> Find a Mentor</a>
+                    <a href="#projects" class="btn-secondary"><i class='bx bx-folder-open'></i> View Projects</a>
+                </div>
+
+                <!-- Daily Quote Box -->
+                <div class="quote-box">
+                    <i class='bx bxs-quote-alt-left quote-icon'></i>
+                    <p id="quoteText">"Loading quote..."</p>
+                    <small id="quoteAuthor"></small>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- Using an illustration instead of simple image for a modern look -->
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                    alt="Students collaborating" class="hero-img">
+            </div>
+        </section>
+
+        <!-- Mentors Section -->
+        <section id="mentors" class="section-padding bg-alt">
+            <div class="section-title">
+                <h2>Top Mentors</h2>
+                <p>Learn directly from our experienced faculty members.</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class='bx bx-search'></i>
+                <input type="text" id="searchInput" placeholder="Search skills (e.g. React, Python)..."
+                    onkeyup="filterMentors()">
+            </div>
+
+            <div class="grid-container" id="mentorGrid">
+                <!-- Mentor 1 -->
+                <div class="card mentor-card" data-skills="web mongodb nodejs">
+                    <img src="https://ui-avatars.com/api/?name=Amit+Sharma&background=0D8ABC&color=fff&size=100"
+                        alt="Dr. Amit">
+                    <h3>Dr. Amit Sharma</h3>
+                    <p class="dept">Dept. of CSE</p>
+                    <div class="tags">
+                        <span>Web</span><span>MongoDB</span><span>Node.js</span>
+                    </div>
+                    <button class="btn-outline w-100"
+                        onclick="openMentorProfile('Dr. Amit Sharma', 'Mon 10:00 AM - 12:00 PM')">View Profile</button>
+                </div>
+
+                <!-- Mentor 2 -->
+                <div class="card mentor-card" data-skills="python ai machine learning">
+                    <img src="https://ui-avatars.com/api/?name=Neha+Gupta&background=E53935&color=fff&size=100"
+                        alt="Ms. Neha">
+                    <h3>Ms. Neha Gupta</h3>
+                    <p class="dept">Dept. of BCA</p>
+                    <div class="tags">
+                        <span>Python</span><span>AI</span><span>Machine Learning</span>
+                    </div>
+                    <button class="btn-outline w-100"
+                        onclick="openMentorProfile('Ms. Neha Gupta', 'Tue 11:30 AM - 1:30 PM')">View Profile</button>
+                </div>
+
+                <!-- Mentor 3 -->
+                <div class="card mentor-card" data-skills="react javascript web design frontend">
+                    <img src="https://ui-avatars.com/api/?name=Rahul+Verma&background=4CAF50&color=fff&size=100"
+                        alt="Mr. Rahul">
+                    <h3>Mr. Rahul Verma</h3>
+                    <p class="dept">Dept. of CSE</p>
+                    <div class="tags">
+                        <span>React</span><span>JavaScript</span><span>Frontend</span>
+                    </div>
+                    <button class="btn-outline w-100"
+                        onclick="openMentorProfile('Mr. Rahul Verma', 'Thu 09:00 AM - 11:00 AM')">View Profile</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section-padding">
+            <div class="section-title">
+                <h2>Active Projects</h2>
+                <p>Join forces with mentors to build real-world solutions.</p>
+            </div>
+
+            <div class="grid-container">
+                <div class="card project-card">
+                    <div class="proj-icon"><i class='bx bx-mobile-alt'></i></div>
+                    <h3>Smart Campus App</h3>
+                    <p>Building an interactive mobile application for Chitkara students using React Native.</p>
+                    <div class="proj-meta">
+                        <span><i class='bx bx-user'></i> Lead: Dr. Amit</span>
+                        <span><i class='bx bx-time'></i> 3 Months</span>
+                    </div>
+                    <button class="btn-primary w-100" onclick="applyProject('Smart Campus App')">Apply Now</button>
+                </div>
+
+                <div class="card project-card">
+                    <div class="proj-icon"><i class='bx bx-bot'></i></div>
+                    <h3>AI Support Chatbot</h3>
+                    <p>A machine learning project using Python to create an automated student FAQ bot.</p>
+                    <div class="proj-meta">
+                        <span><i class='bx bx-user'></i> Lead: Ms. Neha</span>
+                        <span><i class='bx bx-time'></i> 2 Months</span>
+                    </div>
+                    <button class="btn-primary w-100" onclick="applyProject('AI Support Chatbot')">Apply Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section (Hidden by default) -->
+        <section id="dashboard" class="section-padding bg-alt" style="display: none;">
+            <div class="section-title">
+                <h2 id="dashTitle">Student Dashboard</h2>
+                <p id="dashSubtitle">Track your applications and mentorship sessions.</p>
+            </div>
+            
+            <div class="grid-container">
+                <!-- Analytics Cards -->
+                <div class="card">
+                    <h3 style="color: var(--primary); font-size: 40px;" id="projectCount">0</h3>
+                    <p id="projectLabel">Projects Applied</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--primary); font-size: 40px;" id="sessionCount">0</h3>
+                    <p id="sessionLabel">Sessions Requested</p>
+                </div>
+            </div>
+
+            <div class="grid-container" style="margin-top: 40px;">
+                <div class="card" style="text-align: left;">
+                    <h3 id="listOneTitle" style="margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">My Applied Projects</h3>
+                    <ul id="projectList" style="padding-left: 20px; color: var(--text-muted); line-height: 2;">
+                        <li>No projects yet.</li>
+                    </ul>
+                </div>
+                <div class="card" style="text-align: left;">
+                    <h3 id="listTwoTitle" style="margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">My Mentors</h3>
+                    <ul id="sessionList" style="padding-left: 20px; color: var(--text-muted); line-height: 2;">
+                        <li>No sessions yet.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeLogin()"><i class='bx bx-x'></i></span>
+            <div class="modal-header">
+                <i class='bx bx-user-circle'></i>
+                <h2>Student Login</h2>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>I am a:</label>
+                    <select id="loginRole" required style="width: 100%; padding: 10px 15px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-main); outline: none;">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn-primary w-100">Secure Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mentor Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeProfile()"><i class='bx bx-x'></i></span>
+            <div class="modal-header">
+                <i class='bx bx-calendar-star'></i>
+                <h2 id="m-name">Mentor Name</h2>
+            </div>
+            <div class="modal-body">
+                <p><strong><i class='bx bx-time-five'></i> Available Slots:</strong></p>
+                <div class="time-slot" id="m-time">Monday 10:00 AM</div>
+                <p style="margin-top: 15px; color: var(--text-muted);">Would you like to request a mentorship session
+                    during this time?</p>
+            </div>
+            <button class="btn-primary w-100" onclick="bookSession()">Confirm Request</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>LearnLink</h3>
+            <p>&copy; 2026 Built for FEE-1 Project at Chitkara University.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-container">
+        <!-- Floating Button -->
+        <button class="chat-btn" onclick="toggleChat()">
+            <i class='bx bx-message-square-dots'></i>
+        </button>
+
+        <!-- Chat Window -->
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <span><i class='bx bx-bot'></i> LearnLink Assistant</span>
+                <button onclick="toggleChat()" class="icon-btn" style="color: white;"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="msg bot">Hello! I'm your LearnLink guide. Ask me about mentors or projects!</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="handleEnter(event)">
+                <button onclick="sendMessage()"><i class='bx bxs-send'></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
